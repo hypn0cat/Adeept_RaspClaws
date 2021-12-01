@@ -34,7 +34,7 @@ SmoothMode = 0
 steadyMode = 0
 
 def breath_led():
-    LED.breath(255)
+    LED.breath(10)
 
 
 def  ap_thread():

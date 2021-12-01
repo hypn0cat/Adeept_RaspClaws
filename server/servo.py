@@ -42,6 +42,7 @@ pwm3_min  = 300
 pwm3_pos  = pwm3_init
 
 org_pos = 300
+speed = 10
 
 
 def ctrl_range(raw, max_genout, min_genout):
@@ -75,7 +76,7 @@ def camera_ang(direction, ang):
 			org_pos+=ang
 			org_pos = ctrl_range(org_pos, look_max, look_min)
 		elif direction == 'home':
-			org_pos = 300	
+			org_pos = 300
 
 	pwm.set_all_pwm(13,org_pos)
 
@@ -107,11 +108,11 @@ def lookright(speed):
 def up(speed):
 	global pwm1_pos
 	if pwm1_direction:
-		pwm1_pos -= speed
+		pwm1_pos += speed
 		pwm1_pos = ctrl_range(pwm1_pos, pwm1_max, pwm1_min)
 		pwm.set_pwm(13, 0, pwm1_pos)
 	else:
-		pwm1_pos += speed
+		pwm1_pos -= speed
 		pwm1_pos = ctrl_range(pwm1_pos, pwm1_max, pwm1_min)
 		pwm.set_pwm(13, 0, pwm1_pos)
 	#print(pwm1_pos)
@@ -132,11 +133,11 @@ def down(speed):
 def lookup(speed):
 	global pwm2_pos
 	if pwm2_direction:
-		pwm2_pos -= speed
+		pwm2_pos += speed
 		pwm2_pos = ctrl_range(pwm2_pos, pwm2_max, pwm2_min)
 		pwm.set_pwm(13, 0, pwm2_pos)
 	else:
-		pwm2_pos += speed
+		pwm2_pos -= speed
 		pwm2_pos = ctrl_range(pwm2_pos, pwm2_max, pwm2_min)
 		pwm.set_pwm(13, 0, pwm2_pos)
 
@@ -144,11 +145,11 @@ def lookup(speed):
 def lookdown(speed):
 	global pwm2_pos
 	if pwm2_direction:
-		pwm2_pos += speed
+		pwm2_pos -= speed
 		pwm2_pos = ctrl_range(pwm2_pos, pwm2_max, pwm2_min)
 		pwm.set_pwm(13, 0, pwm2_pos)
 	else:
-		pwm2_pos -= speed
+		pwm2_pos += speed
 		pwm2_pos = ctrl_range(pwm2_pos, pwm2_max, pwm2_min)
 		pwm.set_pwm(13, 0, pwm2_pos)
 
@@ -207,9 +208,20 @@ def get_direction():
 
 if __name__ == '__main__':
 	while True:
-		for i in range(0,100):
-			pwm.set_pwm(0, 0, (300+i))
-			time.sleep(0.05)
-		for i in range(0,100):
-			pwm.set_pwm(0, 0, (400-i))
-			time.sleep(0.05)
+		# for i in range(0,100):
+		# 	pwm.set_pwm(13, 0, (300+i))
+		# 	time.sleep(0.05)
+		# for i in range(0,100):
+		# 	pwm.set_pwm(13, 0, (400-i))
+		# 	time.sleep(0.05)
+
+		for i in range(0,9):
+			print("Camera up")
+			up(speed)
+			time.sleep(1)
+		for i in range(0,9):
+			print("Camera down")
+			down(speed)
+			time.sleep(1)
+		time.sleep(1)
+		servo_init()

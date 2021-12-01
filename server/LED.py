@@ -15,7 +15,7 @@ LED_PIN        = 12      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 10     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
@@ -30,7 +30,7 @@ class LED:
         self.LED_PIN        = 12      # GPIO pin connected to the pixels (18 uses PWM!).
         self.LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
         self.LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-        self.LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+        self.LED_BRIGHTNESS = 10      # Set to 0 for darkest and 255 for brightest
         self.LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
         self.LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
         parser = argparse.ArgumentParser()
@@ -130,12 +130,15 @@ class LED:
 
 if __name__ == '__main__':
     led = LED()
-    try:  
-        while True:  
+    try:
+        while True:
+            print("Red")
             led.colorWipe(Color(255, 0, 0))  # red
-            time.sleep(1)  
+            time.sleep(1)
+            print("Green")
             led.colorWipe(Color(0, 255, 0))  # green
-            time.sleep(1)  
+            time.sleep(1)
+            print("Blue")
             led.colorWipe(Color(0, 0, 255))  # blue
             time.sleep(1) 
     except:  
